@@ -1,0 +1,17 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+<div  style="padding: 21px;
+margin-right: 139px;
+margin-left: 117px">
+    <h2>New reply</h2>
+    <hr>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-info"  style="width:95px;">Submit</button>
+    </form>
+    <div>
+{% endblock content %}

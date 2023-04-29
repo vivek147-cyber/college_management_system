@@ -1,0 +1,34 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+<div class="card" id="{{posts.id}}" style="padding: 21px;
+margin-right: 139px;
+margin-left: 117px" >
+<h2>{{ post.title }}</h3>
+<span class="badge bg-info text-dark" style="width:95px">{{post.tags}}</span>
+<span>Posted by {{ post.admin }} on {{ post.created_at }}</span>
+<p>{{ post.body | safe }} </p>
+<hr>
+<p>Reply to this post</p>
+<form method="post" action="{% url 'staff_new_reply' pk=post.pk %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-info"  style="width:95px;">Reply</button>
+</form>
+{% for reply in replies %}
+<div class="card" id="{{posts.id}}" style="padding: 21px;
+margin-right: 139px;
+margin-left: 117px; background-color: ghostwhite;" >
+  <span>{{ reply.admin }} replied on {{ reply.created_at }}</span>
+  <hr>
+  <p>{{ reply.content }}</p>
+</div>
+{% endfor %}
+
+
+</div>
+<br>
+<br>
+{% endblock content %}
